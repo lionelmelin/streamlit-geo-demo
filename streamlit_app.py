@@ -194,6 +194,8 @@ st.altair_chart(
 )
 
 #####################################################################################################################
+st.divider()  # 👈 Draws a horizontal rule
+#########################################################################################
 
 st.title("US counties unemployment with selector")
 
@@ -219,3 +221,17 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 event = st.plotly_chart(fig, on_select="rerun", selection_mode=["points","box","lasso"])
 
 event
+
+#########################################################################################
+st.divider()  # 👈 Draws a horizontal rule
+#########################################################################################
+
+st.title("World life expectancy in 2007")
+
+df_world = px.data.gapminder().query("year==2007")
+fig_world = px.choropleth(df_world, locations="iso_alpha",
+                    color="lifeExp", # lifeExp is a column of gapminder
+                    hover_name="country", # column to add to hover information
+                    color_continuous_scale=px.colors.sequential.Plasma)
+fig_world.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+st.plotly_chart(fig_world)
